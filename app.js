@@ -19,7 +19,12 @@ io.on('connection', (socket) => {
       console.log('message: ' + msg);
     });
   });
-  
+
+  io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg); //send the message to everyone, including the sender.
+  });
+});
 http.listen(3000, () => {
   console.log('listening on *:3000')
 })
